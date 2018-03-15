@@ -1,0 +1,100 @@
+html {
+    box-sizing: border-box;
+    @include desktop {
+        font-size: .9em;
+    }
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body {
+    background-color: $white;
+    margin: 0;
+}
+section {
+    @include flex($direction: column, $align: center);
+    padding: 6.25em 0 7.5em 0;
+    text-align: center;
+    & > div, & > form {
+        max-width: $maxWidth;
+        font-size: 1rem;
+        width: 100%;
+        @include desktop {
+            max-width: 700px;
+        }
+        @include tablet {
+            max-width: 90vw;
+        }
+        @include phone {
+        }
+    }
+    & > .header {
+        padding-bottom: 4.6875em;
+    }
+}
+p, h1, h2, h3, h4, h5, h6, ul, li, a {
+    margin: 0;
+    padding: 0;
+}
+h2 {
+    font: bold 2.5em/4.6875rem Montserrat, sans-serif;
+    letter-spacing: -0.025em;
+    color: $blackText;
+    text-transform: uppercase;
+}
+h3 {
+    font: italic 1em 'Droid Serif', serif;
+    color: $lightText; 
+}
+h4 {
+    font: bold 1.125em Montserrat, sans-serif;
+    letter-spacing: -0.025em;
+    color: $blackText;
+    text-transform: capitalize;
+}
+p {
+    font: 0.875em 'Roboto Slab', serif;
+    letter-spacing: -0.025em;
+    color: $lightText;
+}
+button {
+    width: 25%;
+    height: 4.0625em;
+    color: $white;
+    background-color: $yellow;
+    border: none;
+    border-radius: 3px;
+    font: bold 1.125em Montserrat, sans-serif;
+    line-height: 1.2;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 1s, box-shadow 1s;
+    &:hover {
+        transform: scale(1.2);
+        filter: brightness(1.1);
+        color: darken($yellow, 30%);
+        box-shadow: 0 0 20px 10px black;
+    }
+}
+.social-media {
+    .fa {
+        border-radius: 50%;
+    }
+    & > span:hover {
+        .fa-stack-1x {
+            color: white;
+        }
+        .fa-twitter {
+            background: #00aced;
+        }
+        .fa-facebook {
+            background: #3b5998;
+        }
+        .fa-google-plus {
+            background: #d95232;
+        }
+        .fa-pinterest-p {
+            background: #cb2028;
+        }
+    }
+}

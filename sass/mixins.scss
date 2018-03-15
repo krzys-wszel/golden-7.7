@@ -1,0 +1,86 @@
+@mixin text-stroke($width, $color) {
+    text-stroke: $width $color;
+    -webkit-text-stroke: $width $color;
+}
+@mixin flex($direction: '', $justify: '', $align: '') {
+    display: flex;
+    @if $direction != '' { flex-direction: $direction; }
+    @if $justify != '' { justify-content: $justify; }
+    @if $align != '' { align-items: $align; }
+}
+@mixin grid($row: none, $column: none, $rowGap: '', $columnGap: '') {
+    display: grid;
+    grid: unquote(#{$row}) / unquote(#{$column});
+    -ms-grid-columns: unquote(#{$column});
+    -ms-grid-rows: unquote(#{$row});
+    @if $rowGap != '' and $columnGap != '' {
+        grid-gap: $rowGap $columnGap;
+    } @else {
+        @if $rowGap != '' {
+            grid-row-gap: $rowGap;
+        } @else {
+            @if $columnGap != '' {
+                grid-column-gap: $columnGap;
+            }
+        }
+    }
+}
+@mixin gridElement($rowStart, $rowWidth, $columnStart, $columnWidth) { //for ie
+    -ms-grid-row: $rowStart;
+    -ms-grid-row-span: str-replace(#{$rowWidth}, 'span ');
+    -ms-grid-column: str-replace(#{$columnStart}, 'span ');
+    -ms-grid-column-span: $columnWidth
+}
+@mixin margin-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
+@mixin padding($top: '', $right: '', $bottom: '', $left: '') {
+    @if $top != '' { padding-top: $top; }
+    @if $right != '' { padding-right: $right; }
+    @if $bottom != '' { padding-bottom: $bottom; }
+    @if $left != '' { padding-left: $left; }
+}
+@mixin margin($top: '', $right: '', $bottom: '', $left: '') {
+    @if $top != '' { margin-top: $top; }
+    @if $right != '' { margin-right: $right; }
+    @if $bottom != '' { margin-bottom: $bottom; }
+    @if $left != '' { margin-left: $left; }
+}
+%placeholder::placeholder {
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: -0.025em;
+    color: #bbb;
+    text-transform: uppercase;
+}
+%menu-hamburger {
+    @include flex($direction: column, $justify: center);
+    flex-wrap: wrap;
+}
+//Media queries
+@mixin phone {
+    @media (max-width: $phoneWidth) {
+        @content;
+    }
+}
+@mixin tablet {
+    @media (max-width: $tabletWidth) {
+        @content;
+    }
+}
+@mixin desktop {
+    @media (max-width: $desktopWidth) {
+        @content;
+    }
+}
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}

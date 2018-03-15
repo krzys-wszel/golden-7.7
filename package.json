@@ -1,0 +1,53 @@
+{
+  "name": "7.7-golden",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm-run-all test:*",
+    "test:html": "globstar nu-html-checker *.html",
+    "test1:js": "globstar jshint js/*.js",
+    "init-project": "npm install && npm-run-all init:*",
+    "init:dirs": "mkdirp sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "build": "npm-run-all build:* test",
+    "build:clean": "rimraf css/*.css",
+    "build:sass": "node-sass --output-style compressed -o css sass/style.scss",
+    "build:autoprefixer": "autoprefixer-cli css/style.css",
+    "build-dev:sass": "node-sass --output-style compressed --source-map true -o css sass",
+    "watch": "npm-run-all build -p watch:*",
+    "watch:sassprefixer": "onchange sass/*.scss -- npm-run-all sassprefixer:*",
+    "sassprefixer:sass": "node-sass --output-style compressed --source-map true -o css sass/style.scss",
+    "sassprefixer:autoprefixer": "autoprefixer-cli css/style.css",
+    "watch:browsersync": "browser-sync start --server --files 'css/*.css' '*.html'"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Krzys_wszel",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "autoprefixer-cli": "^1.0.0",
+    "browser-sync": "^2.23.6",
+    "cssnano": "^3.10.0",
+    "globstar": "^1.0.0",
+    "jshint": "^2.9.5",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2",
+    "normalize.css": "^7.0.0",
+    "npm-run-all": "^4.1.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0",
+    "postcss": "^6.0.17",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {}
+}
